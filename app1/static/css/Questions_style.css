@@ -1,0 +1,135 @@
+body {
+  color: black;
+  padding: 0;
+}
+
+.nav-item > a {
+  color: black !important ;
+}
+.active > a {
+  color: white !important;
+}
+.active {
+  background: #393d75;
+}
+.nav-link:hover,
+.nav-link > a:hover {
+  border-radius: 18px;
+  background: #393d75;
+  color: white !important;
+}
+
+.questions {
+  background: url("../media/competition.png") no-repeat;
+  background-position-y: 35vh;
+  background-position-x: 3vw;
+  background-size: 40vw;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+.title_Question {
+  padding-top: 22vh;
+  padding-left: 4vw;
+  padding-right: 50vw;
+  font-size: 6vw;
+  line-height: 10vh;
+  position: fixed !important;
+}
+
+.card-col {
+  padding-top: 10vh;
+  overflow-y: scroll;
+}
+.card {
+  margin-bottom: 3vh;
+  position: relative;
+}
+
+.question_totalCount {
+  position: absolute;
+  bottom: 2%;
+  right: 3%;
+  font-size: 20px;
+}
+
+.card:hover .card-subtitle {
+  color: white !important;
+}
+.card:hover {
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+  background-color: rgba(57, 61, 117, 0.9);
+  color: white !important;
+  -webkit-transition: background-color 1000ms linear;
+  -ms-transition: background-color 1000ms linear;
+  transition: background-color 1000ms linear;
+  -webkit-transition: color 100ms linear;
+  -ms-transition: color 100ms linear;
+  transition: color 100ms linear;
+}
+
+@keyframes updown {
+  0% {
+    bottom: 10%;
+  }
+  100% {
+    bottom: 5%;
+  }
+}
+
+.tag {
+  background-color: #393d75;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+}
+.card :hover .tag {
+  background-color: white !important;
+  color: black;
+}
+.d1 {
+  position: absolute;
+  bottom: 5%;
+  left: 45%;
+  animation: updown 1.5s linear infinite;
+}
+.d1 > img {
+  max-width: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .bg-transparent {
+    background: white !important;
+  }
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  .card-text {
+    padding-bottom: 15px;
+  }
+  .custom-toggler.navbar-toggler {
+    border-color: rgb(0, 0, 0);
+  }
+  .questions {
+    background-size: 100vw !important;
+    background-position-y: 20vh;
+  }
+  .title_Question {
+    padding: 0;
+    padding-top: 15vh;
+    font-size: 15vw;
+    line-height: 7vh;
+    padding-right: 5vw !important;
+  }
+  .card-col {
+    background-color: white;
+    margin-top: 60vh;
+    padding-left: 7.5vw !important;
+  }
+  .card {
+    width: 90vw !important ;
+  }
+}

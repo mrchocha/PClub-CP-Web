@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+    <link rel="shortcut icon" href="{% static 'media/AU_W_.jpg' %}">
+    {% block Extra_css %}{% endblock %}
+    <title>PClub-CP</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top  navbar-dark bg-transparent">
+        <a class="navbar-brand" href="{% url 'Home' %}">
+            {% block navband %}
+            {% endblock %}
+
+            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style="border:0; color: white; ">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item Home active">
+                        <a class="nav-link" href="{% url 'Home' %}">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item Questions ">
+                        <a class="nav-link" href="{% url 'Questions' %}">Questions</a>
+                    </li>
+                    <li class="nav-item Leaderbord">
+                        <a class="nav-link" href="{% url 'Leaderbord' %}">Leaderboard</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+    <div class="timer">
+        <p id="demo"></p>
+    </div>
+
+    {% block navbar %}
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+
+        AOS.init();
+
+        $(".nav-item").on("click", function () {
+            $(".nav-item").removeClass("active");
+            $(this).addClass("active");
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "{% url  'fetch_timer' %}",
+                method: "get",
+                success: function (data) {
+                    console.log(data)
+                    if (!('start_ts' in data)) {
+                        $('.timer').css('display', 'none')
+                        return;
+                    }
+                    var start_datetime = new Date(data['start_ts']).getTime();
+                    var end_datetime = new Date(data['end_ts']).getTime();
+                    var curr = new Date().getTime();
+                    var message_cont = (start_datetime - curr) >= 0 ? "Contest will start in " : "Contest will end in ";
+                    var flag=0;
+                    // Update the count down every 1 second
+                    var x = setInterval(function () {
+
+                        // Get today's date and time
+                        var now = new Date().getTime();
+
+                        // Find the distance between now and the count down date
+                        var distance;
+                        if ((start_datetime-now)>=0) distance=start_datetime-now;
+                        else 
+                        {
+                            distance=end_datetime-now;
+                            flag=1;
+                        }
+                        var message_cont = (start_datetime - now) >= 0 ? "Contest will start in " : "Contest will end in ";
+    
+                        if(Math.round(distance/1000)==0 && flag==0)
+                        {
+                            alert('Contest Started!');
+                            window.location.replace("{% url 'Questions' %}");
+                        }
+                        if(Math.round(distance/1000)==0 && flag==1)
+                        {
+                            alert('Contest Ended!');
+                        }
+                        // Time calculations for days, hours, minutes and seconds
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        // Display the result in the element with id="demo"
+                        document.getElementById("demo").innerHTML = message_cont + days + "d " + hours + "h "
+                            + minutes + "m " + seconds + "s ";
+
+                        // If the count down is finished, write some text
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("demo").innerHTML = "CONTEST ENDED!";
+                        }
+                    }, 1000);
+
+                }
+            });
+        })
+
+
+
+    </script>
+
+    {% block Extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block Extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/Home_style.css' %}">
+{% endblock %}
+
+{% block navband %}
+<img src="{% static 'media/AU_Black_.png' %}" alt="" srcset=""></a>
+{% endblock %}
+
+{% block navbar %}
+<div class="row home_sec1">
+    <div class="col-sm home_sec1_img " data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <img src="{% static 'media/home_img1_programmer.jpg' %}" alt="image not found" srcset="">
+    </div>
+    <div class="col-sm home_sec1_txt">
+        <div class="home_title" data-aos="fade-left">
+            <span> Welcome to</span> Programming Club
+        </div>
+        <div class="ahduni" data-aos="fade-up">Compete Code</div>
+        <div data-aos="fade-up" style="position: relative;" class="button-div">
+            <button type="button" class="btn ">
+                <span class="cta" onclick="myFunction()">
+                    <span>Register</span>
+                    <svg width="13px" height="10px" viewBox="0 0 13 10">
+                        <path d="M1,5 L11,5"></path>
+                        <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <div class="contribution">
+            <span> Developed by
+                <span style="color: yellow;">&#9733;</span>
+                <a href="https://github.com/mrchocha">mrchocha</a> and
+                <span style="color: yellow;">&#9733;</span>
+                <a href="https://github.com/JeetKaria06">JeetKaria06</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="d3">
+    <img src="{% static 'media/d3.png' %}" alt="" srcset="">
+</div>
+<div class="host_con">
+    <div class="host">
+        <img src="{% static 'media/Clique-1.jpeg' %}" alt="" srcset="">
+    </div>
+    <div class="host">
+        <img src="{% static 'media/dsc-1.png' %}" alt="" srcset="">
+    </div>
+    <div class="host">
+        <img src="{% static 'media/CompeteCodeLogo_.png' %}" alt="" srcset="">
+    </div>
+</div>
+{% endblock %}
+{% block Extra_js %}
+<script>
+    $(document).ready(function () {
+        $(".host_con").css("display", "box");
+    })
+    function myFunction() {
+        var CF_ID = prompt("Enter your codeforces handle");
+        var Email = prompt("Enter your email-id");
+        let request = new XMLHttpRequest();
+        request.open("GET", "https://codeforces.com/api/user.info?handles=" + CF_ID);
+        request.send();
+        request.onload = () => {
+            if (request.status == 200) {
+                console.log(JSON.parse(request.response));
+                handle_data = JSON.parse(request.response)["result"][0]
+                if (CF_ID != null && Email != null) {
+                    $.ajax({
+                        url: "{% url  'Register' %}",
+                        method: "get",
+                        data: {
+                            'cf_id': CF_ID,
+                            'email': Email
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data["response"] == 1)
+                                alert("You are registered sucessfully :) Get ready to bring storm to your brain!");
+                            else
+                                alert("You are already registered!");
+                        },
+                        error: function (error_data) {
+                            console.log(error_data);
+                            alert("Something Went Wrong :( ")
+                        }
+                    });
+                }
+                else {
+                    alert("Something Went Wrong :( ")
+                }
+            } else if (request.status == 400) {
+                alert("CF handle entered doesn't exist :( ");
+            } else if (request.status == 429) {
+                alert("Enter your details again after a second.");
+                setTimeout(1000);
+                myFunction();
+            }
+        }
+
+    }
+</script>
+
+
+{% endblock %}

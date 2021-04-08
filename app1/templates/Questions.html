@@ -1,0 +1,54 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% load poll_extras %}
+
+{% block Extra_css %}
+<link rel="stylesheet" href="{% static 'css/Questions_style.css' %}">
+{% endblock %}
+
+{% block navband %}
+<img src="{% static 'media/AU_Black_.png' %}" alt="" srcset=""></a>
+{% endblock %}
+{% block navbar %}
+<div class="questions">
+    <div class="row">
+        <div class="col-sm">
+            <div class="title_Question " data-aos="fade-right">
+                Want To Compete?
+            </div>
+        </div>
+        <div class="col-sm card-col" data-aos="fade-up">
+            {% for question in questions %}
+            <a class="question-link" href="{{ question.Question_link }}" style="color: black; text-decoration: none;">
+                <div class="{% if question.rcid in Question_solved_by_user %} done {% endif %} card" style="width: 40vw;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ question.Question_name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ question.rcid }}</h6>
+                        <p class="card-text">
+                            {% for tag in question.tags|split:"," %}
+                            <span class="tag"> {{ tag }}</span>
+                            {% endfor %} 
+                        </p>
+                        <p class="question_totalCount"> Solved by: {{ question.totalCount }}/{{ question.totalUsers }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="d1">
+    <img src="{% static 'media/tenor.gif' %}" alt="" srcset="">
+</div>
+
+{% endblock %}
+
+{% block Extra_js %}
+<script>
+    path = "{{ request.path }}"
+    path = path.substr(1);
+    $('.active').removeClass("active");
+    $('.' + path).addClass("active");
+</script>
+{% endblock %}

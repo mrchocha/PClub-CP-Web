@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&display=swap");
+body {
+  color: white;
+  font-family: "Hind Vadodara", sans-serif;
+}
+.navbar-brand > img {
+  max-height: 8.5vh;
+  widows: auto;
+  padding: 0;
+}
+
+.nav-link {
+  padding-left: 1vw !important;
+  padding-right: 1vw !important;
+}
+
+.nav-item {
+  color: white !important;
+  padding-left: 0.5vw !important;
+  padding-right: 0.5vw !important;
+}
+.active > a {
+  color: black !important;
+}
+.active {
+  border-radius: 18px;
+  background: white;
+}
+.nav-link:hover,
+.nav-link > a:hover {
+  border-radius: 18px;
+  background: white;
+  color: black !important;
+}
+
+.timer {
+  position: fixed;
+  z-index: 5;
+  top: 0%;
+  left: 40%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 00px;
+  padding-right: 20px;
+  color: black;
+  background-color: white !important;
+}

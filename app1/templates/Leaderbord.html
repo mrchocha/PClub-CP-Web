@@ -1,0 +1,59 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block Extra_css %}
+<link rel="stylesheet" href="{% static 'css/Leaderbord_style.css' %}">
+
+{% endblock %}
+
+
+{% block navband %}
+<img src="{% static 'media/AU_Black_.png' %}" alt="" srcset=""></a>
+{% endblock %}
+
+{% block navbar %}
+<div class="leadebord-home">
+    <div class="leadebord-home-title">
+        Meet the Leaders
+        <div class="anouncement" style="font-size: 1vw;">
+            [ Changes may take some time to reflect on the Leaderboard ]
+        </div>
+    </div>
+    <div class="leadebord-home-title-2">
+        01
+    </div>
+
+</div>
+
+<div class="score-table">
+    {% for leader in leaders %}
+    <a href="https://codeforces.com/profile/{{ leader.usr_name }}" style="color: black; text-decoration: none;">
+        <div class="card" style="width: 80vw;">
+            <div class="card-body row">
+                <div class="col-sm">
+                    <img src="{{ leader.profile_pic }}" alt="not_found" srcset="">
+                    <span class="card-title">{{ leader.usr_name }}</span>
+                </div>
+                <div class="col-sm score ">
+                    <span class="card-text">Score: {{ leader.score }}/{{ totalPros }}</span>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+</div>
+<div class="d1">
+    <img src="{% static 'media/tenor.gif' %}" alt="" srcset="">
+</div>
+{% endblock %}
+
+
+
+{% block Extra_js %}
+<script>
+    path = "{{ request.path }}"
+    path = path.substr(1);
+    $('.active').removeClass("active");
+    $('.' + path).addClass("active");
+</script>
+{% endblock %}

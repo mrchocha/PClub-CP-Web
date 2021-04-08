@@ -1,0 +1,1 @@
+web: gunicorn MyPclub2.wsgi --log-file -
