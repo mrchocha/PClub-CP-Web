@@ -63,7 +63,7 @@ for user in userlist:
     user_score.append(score)
     user_handle.append(handle)
 
-response = requests.post('https://pclub-cp.herokuapp.com/AxYYzz786_rj_leaderboard_overcome_502', data={'score':user_score, 'handle':user_handle, 'question_user_count':question_solved_user_count})
+response = requests.post('https://pclub-cp.herokuapp.com/AxYYzz786_rj_leaderboard_overcome_502', data={'score':user_score, 'handle':user_handle, 'question_user_count':json.dumps(question_solved_user_count), 'question_solved_by_user':json.dumps(question_solved_by_user)})
 # response = requests.post('http://127.0.0.1:8000/AxYYzz786_rj_leaderboard_overcome_502', data={'score':user_score, 'handle':user_handle, 'question_user_count':json.dumps(question_solved_user_count), 'question_solved_by_user':json.dumps(question_solved_by_user)})
 
 print(response.text)
