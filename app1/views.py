@@ -65,10 +65,7 @@ def AxYYzz786_rj(request):
 
 @csrf_exempt
 def AxYYzz786_rj_leaderboard_overcome_502(request):
-    if len(request.POST.getlist('question_solved_by_user'))==0:
-        question_solved_by_user = {}
-    else:
-        question_solved_by_user = json.loads(request.POST.getlist('question_solved_by_user')[0])
+    question_solved_by_user = json.loads(request.POST.getlist('question_solved_by_user')[0])
         
     for user in question_solved_by_user.keys():
         obj = Users.objects.filter(usr_name=user).update(solved_questions=question_solved_by_user[user])
