@@ -1,7 +1,7 @@
 # PClub-CP-Web
 
 <p  align="center" >
-<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/Black_logo.png" height="250">
+<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/Black_T.png" height="250">
   <h1 align="center" >Programming Club</h1>
 </p>
 
@@ -20,7 +20,7 @@ registered users based on the number of Questions solved by them. Specific ranks
 <br>
 
 <p  align="center" >
-<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/register.png" height="270">
+<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/home.png" height="270">
 </p>
 <br>
 
@@ -36,7 +36,7 @@ registered users based on the number of Questions solved by them. Specific ranks
 <br>
 
 <p  align="center" >
-<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/leaders.png" height="270">
+<img src="https://github.com/mrchocha/PClub-CP-Web/blob/master/snapshots/leaderboard.png" height="270">
 </p>
 
 
