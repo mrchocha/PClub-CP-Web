@@ -52,7 +52,6 @@ MIDDLEWARE = [
 ]
 
 
-
 ROOT_URLCONF = 'MyPclub2.urls'
 
 TEMPLATES = [
