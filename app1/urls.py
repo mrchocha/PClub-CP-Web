@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+import os
 from . import views
+
 urlpatterns = [
     path('', views.Home,name='Home'),
     path('Questions', views.Ques,name='Questions'),
     path('Leaderbord', views.Leaderbord,name='Leaderbord'),
     path('Register', views.Register,name='Register'),
-    path('AxYYzz786_rj', views.getUserList,name='AxYYzz786_rj'),
-    path('AxYYzz786_rj_leaderboard_overcome_502', views.updateLeaderboard, name='AxYYzz786_rj_leaderboard_overcome_502'),
+    path(os.environ.get('Get_User_List'), views.getUserList,name='getUserList'),
+    path(os.environ.get('Update_Leaderboard'), views.updateLeaderboard, name='updateLeaderboard'),
     path('fetch_timer', views.fetch_timer, name="fetch_timer"),
     path('Questions/<slug:id>', views.Question_User,name='Questions')
 ]
